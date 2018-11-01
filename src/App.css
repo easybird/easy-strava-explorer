@@ -3,7 +3,9 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  background-color: white;
+  border-radius: 20px;
+  animation: App-logo-spin 2s ease-in;
   height: 40vmin;
 }
 
@@ -24,9 +26,9 @@
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate3d(1, 1, 1, 0deg) scale(0.5);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate3d(1, 1, 1, 360deg) scale(1);
   }
 }
