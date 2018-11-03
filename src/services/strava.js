@@ -1,7 +1,7 @@
-const CLIENT_ID = ""
-// DO NOT COMMIT
-const CLIENT_SECRET = "";
-// DO NOT COMMIT
+import config from '../config.json';
+
+const CLIENT_ID = config.clientId;
+const CLIENT_SECRET = config.clientSecret;
 const REDIRECT_URI = process.env.NODE_ENV !== 'production' ? "http://localhost:3000/tokenresponse" : "http://whatever";
 const LIST_OF_ACTIVITIES = "https://www.strava.com/api/v3/athlete/activities"
 export const STRAVA_REDIRECT_URL = `https://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}`;

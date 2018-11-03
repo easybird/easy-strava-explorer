@@ -3,25 +3,36 @@ import strava from './strava.svg';
 import './App.css';
 import {STRAVA_REDIRECT_URL, auth, getStats} from './services/strava';
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import useLogin from './hooks/useLogin';
+
+const LOCAL_STORAGE_ACCESS_TOKEN = 'accessToken';
+const LOCAL_STORAGE_ATHLETE = 'athlete';
 
 let code;
-let accessToken;
-let athlete;
 
-class Home extends Component {
-  render () {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={strava} className="App-logo" alt="logo" />
-          <a className="App-link" href={STRAVA_REDIRECT_URL}>
-            Login to Strava
-          </a>
-        </header>
-      </div>
-    );
+const Home = ({location}) => {
+  const {isLoggedIn} = useLogin ();
+
+  if (isLoggedIn) {
+    return <Redirect
+      to={{
+        pathname: '/stats',
+        state: {from: location},
+      }}
+    />;
   }
-}
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={strava} className="App-logo" alt="logo" />
+        <a className="App-link" href={STRAVA_REDIRECT_URL}>
+          Login to Strava
+        </a>
+      </header>
+    </div>
+  );
+};
 
 class AuthenticationCallback extends Component {
   state = {
@@ -34,8 +45,11 @@ class AuthenticationCallback extends Component {
     const result = await auth (code);
 
     if (result['access_token'] && result.athlete) {
-      accessToken = result['access_token'];
-      athlete = result.athlete;
+      localStorage.setItem (LOCAL_STORAGE_ACCESS_TOKEN, result['access_token']);
+      localStorage.setItem (
+        LOCAL_STORAGE_ATHLETE,
+        JSON.stringify (result.athlete)
+      );
     }
     this.setState ({authenticated: true});
   }
@@ -54,49 +68,62 @@ class AuthenticationCallback extends Component {
 
 class BasicStats extends Component {
   state = {
-    basicStats: null
+    basicStats: null,
+  };
+
+  async componentDidMount () {
+    const basicStats = await getStats (this.props.accessToken);
+    this.setState ({basicStats});
   }
 
-  async componentDidMount() {
-    const basicStats = await getStats(accessToken);
-    this.setState({basicStats})
-  }
-
-  render() {
+  render () {
     if (!this.state.basicStats) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     }
-    return <div><p>{JSON.stringify(this.state.basicStats)}</p></div>
+    return <div><p>{JSON.stringify (this.state.basicStats)}</p></div>;
   }
 }
 
-const Stats = ({location}) =>
-  athlete
-    ? <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <p>{JSON.stringify (athlete)}</p>
-        <h1>
-          <span role="img" aria-label="Hello">👋</span>
-          {' '}
-          {athlete.firstname}
-          {' '}
-          {athlete.lastname}
-        </h1>
-        <img src={athlete.profile} alt={athlete.username} />
-        <h2>Here are your basic stats</h2>
-        <BasicStats />
-      </div>
-    : <Redirect
+const Stats = ({location}) => {
+  const {isLoggedIn, athlete, accessToken} = useLogin ();
+
+  if (typeof isLoggedIn === 'undefined') {
+    return <div>Fetching from localStorage...</div>;
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <Redirect
         to={{
           pathname: '/',
           state: {from: location},
         }}
-      />;
+      />
+    );
+  }
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <p>{JSON.stringify (athlete)}</p>
+      <h1>
+        <span role="img" aria-label="Hello">👋</span>
+        {' '}
+        {athlete.firstname}
+        {' '}
+        {athlete.lastname}
+      </h1>
+      <img src={athlete.profile} alt={athlete.username} />
+      <h2>Here are your basic stats</h2>
+      <BasicStats accessToken={accessToken} />
+    </div>
+  );
+};
 
 function BasicExample () {
   return (
