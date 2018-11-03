@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import strava from './strava.svg';
 import './App.css';
-import {STRAVA_REDIRECT_URL, auth, getStats} from './services/strava';
+import {STRAVA_REDIRECT_URL, auth} from './services/strava';
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import useLogin from './hooks/useLogin';
+import BasicStats from './components/BasicStats';
 
 const LOCAL_STORAGE_ACCESS_TOKEN = 'accessToken';
 const LOCAL_STORAGE_ATHLETE = 'athlete';
@@ -63,24 +64,6 @@ class AuthenticationCallback extends Component {
           }}
         />
       : <div><p>Authentication busy...</p></div>;
-  }
-}
-
-class BasicStats extends Component {
-  state = {
-    basicStats: null,
-  };
-
-  async componentDidMount () {
-    const basicStats = await getStats (this.props.accessToken);
-    this.setState ({basicStats});
-  }
-
-  render () {
-    if (!this.state.basicStats) {
-      return <div>Loading...</div>;
-    }
-    return <div><p>{JSON.stringify (this.state.basicStats)}</p></div>;
   }
 }
 
