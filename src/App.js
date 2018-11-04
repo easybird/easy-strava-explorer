@@ -15,12 +15,14 @@ const Home = ({location}) => {
   const {isLoggedIn} = useLogin ();
 
   if (isLoggedIn) {
-    return <Redirect
-      to={{
-        pathname: '/stats',
-        state: {from: location},
-      }}
-    />;
+    return (
+      <Redirect
+        to={{
+          pathname: '/stats',
+          state: {from: location},
+        }}
+      />
+    );
   }
 
   return (
@@ -102,7 +104,8 @@ const Stats = ({location}) => {
         {athlete.lastname}
       </h1>
       <img src={athlete.profile} alt={athlete.username} />
-      <h2>Here are your basic stats</h2>
+      <h2>HR-RS Index</h2>
+      <h4>The index reflexes the pace independent running performance, where a decrease means a performance increase.</h4>
       <BasicStats accessToken={accessToken} />
     </div>
   );
