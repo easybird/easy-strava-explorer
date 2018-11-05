@@ -13,22 +13,7 @@ const KEYS = {
 };
 const {Header} = Layout;
 
-const HeaderComponent = ({pathname}) => {
-  const {isLoggedIn} = useLogin ();
-  const [selectedItemKey, setSelectedItemKey] = useState (
-    getSelectedItemKey ()
-  );
-
-  useEffect (
-    () => {
-      setSelectedItemKey (getSelectedItemKey ());
-    },
-    [pathname]
-  );
-
-  console.log('---isLoggedIn', isLoggedIn, '\n');
-
-  function getSelectedItemKey () {
+function getSelectedItemKey (pathname) {
     switch (pathname) {
       case '/stats':
         return KEYS.STATS;
@@ -41,6 +26,21 @@ const HeaderComponent = ({pathname}) => {
         return KEYS.HOME;
     }
   }
+
+const HeaderComponent = ({pathname}) => {
+  const {isLoggedIn} = useLogin ();
+  const [selectedItemKey, setSelectedItemKey] = useState (
+    getSelectedItemKey ()
+  );
+
+  useEffect (
+    () => {
+      setSelectedItemKey (getSelectedItemKey (pathname));
+    },
+    [pathname]
+  );
+
+  console.log('---isLoggedIn', isLoggedIn, '\n');
 
   return (
     <Header style={{background: 'white'}}>
