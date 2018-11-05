@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import strava from './strava.svg';
+import 'antd/dist/antd.css';
 import './App.css';
 import {STRAVA_REDIRECT_URL, auth} from './services/strava';
-import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import useLogin from './hooks/useLogin';
 import BasicStats from './components/BasicStats';
+import Header from './components/Header';
+import {Layout} from 'antd';
+import Info from './pages/InfoContainer';
+
+const {Content} = Layout;
 
 const LOCAL_STORAGE_ACCESS_TOKEN = 'accessToken';
 const LOCAL_STORAGE_ATHLETE = 'athlete';
@@ -95,7 +101,7 @@ const Stats = ({location}) => {
         flexDirection: 'column',
       }}
     >
-      <p>{JSON.stringify (athlete)}</p>
+      {/* <p>{JSON.stringify (athlete)}</p> */}
       <h1>
         <span role="img" aria-label="Hello">👋</span>
         {' '}
@@ -105,7 +111,9 @@ const Stats = ({location}) => {
       </h1>
       <img src={athlete.profile} alt={athlete.username} />
       <h2>HR-RS Index</h2>
-      <h4>The index reflexes the pace independent running performance, where a decrease means a performance increase.</h4>
+      <h4>
+        The index reflexes the pace independent running performance, where a decrease means a performance increase.
+      </h4>
       <BasicStats accessToken={accessToken} />
     </div>
   );
@@ -115,23 +123,19 @@ function BasicExample () {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/stats">Stats</Link>
-          </li>
-          <li>
-            <a href={STRAVA_REDIRECT_URL}>Login</a>
-          </li>
-        </ul>
+      <Route render={(props) => {
+                  return (
+                    <Header pathname={props.location.pathname}/>
+                  )
+                }} />
 
-        <hr />
+        <Content style={{padding: '50px'}}>
+          <Route exact path="/" component={Home} />
+          <Route path="/tokenresponse" component={AuthenticationCallback} />
+          <Route path="/stats" component={Stats} />
+          <Route path="/info" component={Info} />
 
-        <Route exact path="/" component={Home} />
-        <Route path="/tokenresponse" component={AuthenticationCallback} />
-        <Route path="/stats" component={Stats} />
+        </Content>
       </div>
     </Router>
   );

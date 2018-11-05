@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.10.4",
     "pondjs": "^0.8.9",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",

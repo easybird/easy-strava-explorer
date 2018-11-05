@@ -12,7 +12,8 @@ export default function useLogin() {
         const accessToken = localStorage.getItem(LOCAL_STORAGE_ACCESS_TOKEN);
         const athlete = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ATHLETE));
 
-        if (accessToken) {
+        // will be string 'null'  as it comes from localStorage
+        if (accessToken !== 'null') {
             setAccessToken(accessToken);
             setAthlete(athlete);
             setIsLoggedIn(true)

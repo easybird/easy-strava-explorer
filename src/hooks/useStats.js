@@ -75,7 +75,7 @@ export default function useStats (accessToken) {
 
   useEffect (
     async () => {
-      if (!stats) {
+      if (accessToken && !stats) {
         const backendStats = await getStats (accessToken);
         setStats (
           backendStats.filter (
