@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {auth} from '../services/strava';
 import { Redirect} from 'react-router-dom';
+import {useDispatch, useMappedState } from 'redux-react-hook';
+import { LOGIN_SUCCESS } from '../store/reducers/authentication';
 
-const LOCAL_STORAGE_ACCESS_TOKEN = 'accessToken';
-const LOCAL_STORAGE_ATHLETE = 'athlete';
-
-let code;
+const mapState = ({authentication}) => ({
+    authenticated: authentication.authenticated
+})
 
 const AuthenticationCallback = ({location}) => {
-    const [authenticated, setAuthentication] = useState(false);
+    const {authenticated } = useMappedState(mapState);
+    const dispatch = useDispatch();
+
+    const loginSuccess = ({ accessToken, athlete }) => dispatch({ type: LOGIN_SUCCESS, payload: { accessToken, athlete }});
 
     useEffect(async () => {
-        code = new URLSearchParams (location.search).get ('code');
+        if (!authenticated) {
+            const code = new URLSearchParams (location.search).get ('code');
 
-        const result = await auth (code);
+            const result = await auth (code);
 
-        if (result['access_token'] && result.athlete) {
-          localStorage.setItem (LOCAL_STORAGE_ACCESS_TOKEN, result['access_token']);
-          localStorage.setItem (
-            LOCAL_STORAGE_ATHLETE,
-            JSON.stringify (result.athlete)
-          );
+            if (result['access_token'] && result.athlete) {
+              loginSuccess({ accessToken: result['access_token'] , athlete: result.athlete});
+
+            //   localStorage.setItem (LOCAL_STORAGE_ACCESS_TOKEN, result['access_token']);
+            //   localStorage.setItem (
+            //     LOCAL_STORAGE_ATHLETE,
+            //     JSON.stringify (result.athlete)
+            //   );
+            }
         }
-        setAuthentication(true);
-    })
-
+    }, [ authenticated ])
 
       return authenticated
         ? <Redirect
             to={{
-              pathname: '/stats',
+              pathname: '/',
               state: {from: location},
             }}
           />

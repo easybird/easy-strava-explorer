@@ -1,24 +1,26 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
 import BasicStats from '../components/BasicStats';
+import { useMappedState } from 'redux-react-hook';
+import useStats from '../hooks/useStats';
+
+const mapState = ({authentication}) => ({
+  authenticated: authentication.authenticated,
+  athlete: authentication.athlete,
+  accessToken: authentication.accessToken
+})
 
 const Stats = ({location}) => {
-    const {isLoggedIn, athlete, accessToken} = useLogin ();
+    const {authenticated, athlete, accessToken } = useMappedState(mapState);
+    const {stats, hrRsTimeSeriesData} = useStats (accessToken);
 
-    if (typeof isLoggedIn === 'undefined') {
-      return <div>Fetching from localStorage...</div>;
-    }
-
-    if (!isLoggedIn) {
-      return (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: {from: location},
-          }}
-        />
-      );
+    if (!authenticated) {
+      return <Redirect
+      to={{
+        pathname: '/',
+        state: {from: location},
+      }}
+    />;
     }
 
     return (
@@ -29,7 +31,6 @@ const Stats = ({location}) => {
           flexDirection: 'column',
         }}
       >
-        {/* <p>{JSON.stringify (athlete)}</p> */}
         <h1>
           <span role="img" aria-label="Hello">👋</span>
           {' '}
@@ -42,7 +43,7 @@ const Stats = ({location}) => {
         <h4>
           The index reflexes the pace independent running performance, where a decrease means a performance increase.
         </h4>
-        <BasicStats accessToken={accessToken} />
+        <BasicStats stats={stats} hrRsTimeSeriesData={hrRsTimeSeriesData} />
       </div>
     );
   };

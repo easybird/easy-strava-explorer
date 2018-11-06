@@ -76,6 +76,7 @@ export default function useStats (accessToken) {
   useEffect (
     async () => {
       if (accessToken && !stats) {
+
         const backendStats = await getStats (accessToken);
         setStats (
           backendStats.filter (
@@ -85,7 +86,7 @@ export default function useStats (accessToken) {
         );
       }
     },
-    [stats]
+    [stats, accessToken]
   );
 
   //  The prerequisites for calculation are that your speed remains above 6 km/h and that the run lasts for at least 12 minutes.

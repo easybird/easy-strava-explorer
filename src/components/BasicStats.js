@@ -1,5 +1,4 @@
 import React from 'react';
-import useStats from '../hooks/useStats';
 import {metresPerSecondToKmPerHour} from '../utils/conversions';
 import ChartsContainer from './ChartsContainer';
 
@@ -32,8 +31,8 @@ const Run = ({run}) => {
     </div>
   );
 };
-const BasicStats = ({accessToken}) => {
-  const {stats, hrRsTimeSeriesData: { hrRsTimeSeries, min, max}} = useStats (accessToken);
+const BasicStats = ({stats, hrRsTimeSeriesData}) => {
+  const { hrRsTimeSeries, min, max} = hrRsTimeSeriesData;
 
   if (!stats) {
     return <div>Loading...</div>;

@@ -1,21 +1,18 @@
 import React from 'react';
 import strava from '../strava.svg';
 import {STRAVA_REDIRECT_URL} from '../services/strava';
-import {Redirect} from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
+import {useMappedState } from 'redux-react-hook';
 
-const Home = ({location}) => {
-    const {isLoggedIn} = useLogin ();
+const mapState = ({authentication}) => ({
+    authenticated: authentication.authenticated,
+    athlete: authentication.athlete
+})
 
-    if (isLoggedIn) {
-      return (
-        <Redirect
-          to={{
-            pathname: '/stats',
-            state: {from: location},
-          }}
-        />
-      );
+const Home = () => {
+    const {authenticated, athlete } = useMappedState(mapState)
+
+    if (authenticated) {
+      return <div>Hallo atleetje: {JSON.stringify(athlete)}</div>
     }
 
     return (
