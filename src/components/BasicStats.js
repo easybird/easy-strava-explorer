@@ -31,17 +31,17 @@ const Run = ({run}) => {
     </div>
   );
 };
-const BasicStats = ({stats, hrRsTimeSeriesData}) => {
+const BasicStats = ({hrrs, hrRsTimeSeriesData}) => {
   const { hrRsTimeSeries, min, max} = hrRsTimeSeriesData;
 
-  if (!stats) {
+  if (!hrrs) {
     return <div>Loading...</div>;
   }
 
   return (
     <div style={{alignItems: 'left', width: '80vh'}}>
-      <ChartsContainer stats={stats} hrTimeSeries={hrRsTimeSeries} min={min} max={max} />
-      {stats.map (run => <Run key={run.id} run={run} />)}
+      <ChartsContainer hrrs={hrrs} hrTimeSeries={hrRsTimeSeries} min={min} max={max} />
+      {hrrs.map (run => <Run key={run.id} run={run} />)}
     </div>
   );
 };

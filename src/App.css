@@ -1,30 +1,32 @@
-.App {
+.Home {
   text-align: center;
 }
 
-.App-logo {
-  background-color: white;
+.Home-logo {
+  border-color: black;
+  border-width: 0.05em;
+  border-style: solid;
   border-radius: 20px;
-  animation: App-logo-spin 2s ease-in;
+  animation: Home-logo-spin 2s ease-in;
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Home-header {
+  /* background-color: #282c34; */
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Home-paragraph {
+  margin-bottom: 3em;
+  margin-top: 3em;
 }
 
-@keyframes App-logo-spin {
+@keyframes Home-logo-spin {
   from {
     transform: rotate3d(1, 1, 1, 0deg) scale(0.5);
   }

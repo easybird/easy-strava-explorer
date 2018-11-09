@@ -6,7 +6,7 @@ import Header from './components/Header';
 import {Layout} from 'antd';
 import {StoreProvider} from 'redux-react-hook';
 import configureStore from './store';
-import { Home, Stats, Info, AuthenticationCallback } from './pages';
+import { Home, HRRS, Info, AuthenticationCallback } from './pages';
 import { PersistGate } from 'redux-persist/integration/react'
 
 const {Content} = Layout;
@@ -20,7 +20,7 @@ export default () =>(
       <div>
         <Route
           render={props => {
-            return <Header location={props.location.pathname} />;
+            return <Header pathname={props.location.pathname} />;
           }}
         />
 
@@ -28,7 +28,7 @@ export default () =>(
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/tokenresponse" component={AuthenticationCallback} />
-          <Route path="/stats" component={Stats} />
+          <Route path="/hrrs" component={HRRS} />
           <Route path="/info" component={Info} />
           <Route component={Home} />
           </Switch>

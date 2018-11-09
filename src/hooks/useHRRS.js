@@ -66,19 +66,19 @@ function useHrRsTimeSeries (stats = []) {
   return hrRsData;
 }
 
-export default function useStats (accessToken) {
-  const [stats, setStats] = useState ();
-  const hrRsTimeSeriesData = useHrRsTimeSeries (stats);
+export default function useHRRS (accessToken) {
+  const [hrrs, setHrrs] = useState ();
+  const hrRsTimeSeriesData = useHrRsTimeSeries (hrrs);
 
   const [allPlots, setAllPlots] = useState (); // the plotted data: heart rate (Y) / speed (X)
   const [lastMonthPlots, setLastMonthPlots] = useState (); // the plotted data: heart rate (Y) / speed (X)
 
   useEffect (
     async () => {
-      if (accessToken && !stats) {
+      if (accessToken && !hrrs) {
 
         const backendStats = await getStats (accessToken);
-        setStats (
+        setHrrs (
           backendStats.filter (
             ({visibility, type, has_heartrate}) =>
               visibility === 'everyone' && type === 'Run' && has_heartrate
@@ -86,14 +86,14 @@ export default function useStats (accessToken) {
         );
       }
     },
-    [stats, accessToken]
+    [hrrs, accessToken]
   );
 
   //  The prerequisites for calculation are that your speed remains above 6 km/h and that the run lasts for at least 12 minutes.
   // set maximal and resting heart rate
   const logStats = () =>
-    stats &&
-    stats.forEach (stat =>
+  hrrs &&
+  hrrs.forEach (stat =>
       console.log (
         '---stat',
         stat,
@@ -107,5 +107,5 @@ export default function useStats (accessToken) {
 
     logStats ();
 
-  return {stats, hrRsTimeSeriesData};
+  return {hrrs, hrRsTimeSeriesData};
 }
