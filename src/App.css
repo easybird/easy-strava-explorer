@@ -3,17 +3,10 @@
 }
 
 .Home-logo {
-  border-color: black;
-  border-width: 0.05em;
-  border-style: solid;
-  border-radius: 20px;
-  animation: Home-logo-spin 2s ease-in;
-  height: 40vmin;
+  animation: Home-logo-spin 1500ms ease-in;
 }
 
 .Home-header {
-  /* background-color: #282c34; */
-  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +21,7 @@
 
 @keyframes Home-logo-spin {
   from {
-    transform: rotate3d(1, 1, 1, 0deg) scale(0.5);
+    transform: rotate3d(1, 1, 1, 0deg) scale(0.1);
   }
   to {
     transform: rotate3d(1, 1, 1, 360deg) scale(1);

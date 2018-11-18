@@ -5,6 +5,7 @@ import {useDispatch, useMappedState} from 'redux-react-hook';
 import {STRAVA_REDIRECT_URL} from '../services/strava';
 import {LOGOUT_SUCCESS} from '../store/reducers/authentication';
 import strava from '../strava.svg';
+import connectWithStrava from '../assets/btn_strava_connectwith_light.svg';
 
 const KEYS = {
   HOME: '1',
@@ -68,9 +69,8 @@ const HeaderComponent = ({pathname}) => {
               Logout
             </Button>]
           : [
-            <Avatar src={strava} alt="logo" />,
-          <Button onClick={() => (window.location = STRAVA_REDIRECT_URL)}>
-              Login
+          <Button size="large" onClick={() => (window.location = STRAVA_REDIRECT_URL)}>
+                <img src={connectWithStrava} alt="connect with strava" />
             </Button>]
             }
       </div>

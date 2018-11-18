@@ -22,12 +22,6 @@ const AuthenticationCallback = ({location}) => {
 
             if (result['access_token'] && result.athlete) {
               loginSuccess({ accessToken: result['access_token'] , athlete: result.athlete});
-
-            //   localStorage.setItem (LOCAL_STORAGE_ACCESS_TOKEN, result['access_token']);
-            //   localStorage.setItem (
-            //     LOCAL_STORAGE_ATHLETE,
-            //     JSON.stringify (result.athlete)
-            //   );
             }
         }
     }, [ authenticated ])
