@@ -82,7 +82,7 @@ const AthleteWelcome = ({athlete, userStats}) => {
   return (
     <Card
       style={{width: '100%', maxWidth: "450px"}}
-      title={`👋 ${athlete.firstname} ${athlete.lastname}, check out your overall stats`}
+      title={`👋 ${athlete.firstname} ${athlete.lastname}, check your stats`}
       cover={
         <img
           src={athlete.profile}

@@ -10,6 +10,7 @@ import {Home, HRRS, Info, AuthenticationCallback} from './pages';
 import {PersistGate} from 'redux-persist/integration/react';
 import powerdByStravaHorizontal
   from './assets/api_logo_pwrdBy_strava_horiz_light.svg';
+import hero from './assets/hero-run.jpg';
 
 const {Content, Footer} = Layout;
 
@@ -20,13 +21,16 @@ export default () => (
     <PersistGate loading={null} persistor={persistor}>
       <Router>
         <div>
+          <img style={{position: "absolute", width: '100vw', height: '50vh', objectFit: "cover", objectPosition: "50% 70%"}} src={hero} alt="powered by strava"/>
+          <div style={{height: '50vh'}}>
           <Route
             render={props => {
               return <Header pathname={props.location.pathname} />;
             }}
           />
+          </div>
 
-          <Content style={{padding: '50px'}}>
+          <Content>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/tokenresponse" component={AuthenticationCallback} />
@@ -38,7 +42,7 @@ export default () => (
           <Footer>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
               <div style={{width: '200px'}}>
-                <img src={powerdByStravaHorizontal} />
+                <img src={powerdByStravaHorizontal} alt="powered by strava"/>
               </div>
               <div>
                 Please note that we are not related to Strava, we are just using their

@@ -30,7 +30,12 @@ export async function getUserStats(id, accessToken) {
 }
 
 export async function getListOfActivities(accessToken) {
+    console.log('---wwwuuuut!', "getListOfActivities", '\n');
+
     return fetch(LIST_OF_ACTIVITIES, { headers:
         {'Authorization': `Bearer ${accessToken}`}
-    }).then(response => response.json());
+    }).then(response => response.json()).then(response => {
+        console.log('---wwwuuuut!', response, '\n');
+        return response
+    });
 }

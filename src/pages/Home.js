@@ -1,10 +1,9 @@
 import React from 'react';
 import connectWithStrava from '../assets/btn_strava_connectwith_light.svg';
 
-import howYouDoin from '../assets/how-you-doin.gif';
 import {STRAVA_REDIRECT_URL} from '../services/strava';
 import {useMappedState} from 'redux-react-hook';
-import {Row, Col, Avatar, Divider, List, Card} from 'antd';
+import {Row, Col, Divider, List, Card} from 'antd';
 import {Link} from 'react-router-dom';
 import AthleteWelcome from '../components/AthleteWelcome';
 
@@ -14,19 +13,40 @@ const mapState = ({authentication, stats}) => ({
   userStats: stats.userStats
 });
 
-const Intro = () => [
-  <Row key="stamina" className="Home-paragraph">
-    <h2>Check out your stamina</h2>
-    <h4>
-      Personally I like to run on a low heart rate, and Strava is mainly focussed on "speed records", but I honestly couldn't care less for most of my runs. I just want to know if my stamina is evolving, and if so, in which direction. This app is mainly used to show you some extended data that you won't see on Strava.
-    </h4>
-  </Row>,
+const WelcomeText = () => <Row key="stamina" className="Home-paragraph">
+<h2>Run with your stamina in mind</h2>
+<h4>
+  Do you like to run on a low heart rate? You don't care about speed for most of your runs? Then Strava also lacks some info for you.
+  This app solves this lack of knowledge. It visualises how your stamina is evolving, and in which direction.
+</h4>
+</Row>
+
+
+
+const Intro = ({authenticated, athlete, userStats}) => [
   <Row key="tryout" className="Home-paragraph">
     <h2>Want to give it a try?</h2>
-    <p>
-      Login to Strava, and let us calculate how you doin'.
-    </p>
-    <img src={howYouDoin} />
+
+    {authenticated
+  ? <AthleteWelcome athlete={athlete} userStats={userStats}/>
+  : <a href={STRAVA_REDIRECT_URL}>
+      <Card
+        hoverable
+        cover={
+          <img
+            src={connectWithStrava}
+            className="Home-logo"
+            alt="connect with strava"
+          />
+        }
+      >
+        <Card.Meta
+          title="First things first"
+          description="To make this app useful for you, please log in to strava"
+        />
+
+      </Card>
+    </a>}
   </Row>,
   <Row key="investigation" className="Home-paragraph">
     <h2>What will we investigate?</h2>
@@ -74,29 +94,10 @@ const Home = () => {
       <Col span={16} offset={4}>
         <Row className="Home-paragraph">
           <header className="Home-header">
-            {authenticated
-              ? <AthleteWelcome athlete={athlete} userStats={userStats}/>
-              : <a href={STRAVA_REDIRECT_URL}>
-                  <Card
-                    hoverable
-                    cover={
-                      <img
-                        src={connectWithStrava}
-                        className="Home-logo"
-                        alt="connect with strava"
-                      />
-                    }
-                  >
-                    <Card.Meta
-                      title="First things first"
-                      description="To make this app useful for you, please log in to strava"
-                    />
-
-                  </Card>
-                </a>}
-          </header>
+                <WelcomeText />
           <Divider />
-          <Intro />
+          </header>
+          <Intro authenticated={authenticated} athlete={athlete} userStats={userStats}/>
         </Row>
       </Col>
     </Row>

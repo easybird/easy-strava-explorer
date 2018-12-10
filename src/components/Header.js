@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useMappedState} from 'redux-react-hook';
 import {STRAVA_REDIRECT_URL} from '../services/strava';
 import {LOGOUT_SUCCESS} from '../store/reducers/authentication';
-import strava from '../strava.svg';
 import connectWithStrava from '../assets/btn_strava_connectwith_light.svg';
 
 const KEYS = {
@@ -52,7 +51,7 @@ const HeaderComponent = ({pathname}) => {
   );
 
   return (
-    <Header style={{background: 'white'}}>
+    <Header style={{backgroundColor: 'white'}}>
       <Menu
         mode="horizontal"
         selectedKeys={[selectedItemKey]}
@@ -70,7 +69,7 @@ const HeaderComponent = ({pathname}) => {
             </Button>]
           : [
           <Button size="large" onClick={() => (window.location = STRAVA_REDIRECT_URL)}>
-                <img src={connectWithStrava} alt="connect with strava" />
+                <img style={{ height: '40px'}} src={connectWithStrava} alt="connect with strava" />
             </Button>]
             }
       </div>
