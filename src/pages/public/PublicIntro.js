@@ -37,8 +37,7 @@ export const PublicIntro = () => [
       <h2>What will we investigate?</h2>
       <h4>We will combine your heart rate and your average speed.</h4>
       <blockquote>
-        The lower your heart rate is at a certain speed, the better your stamina
-        is.
+        The lower your heart rate at a certain speed, the better your stamina.
       </blockquote>
       <p>
         Once you're logged in, this app bundles the data of your runs, mixes your

@@ -34,8 +34,8 @@ export const Welcome = ({athlete, userStats}) => [
         }}
       >
         <blockquote>
-          Heart Rate Running Speed Index: The lower your heart rate is at a
-          certain speed, the better your stamina is.
+          Heart Rate Running Speed Index: The lower your heart rate at a
+          certain speed, the better your stamina.
         </blockquote>
       </div>
     </div>
