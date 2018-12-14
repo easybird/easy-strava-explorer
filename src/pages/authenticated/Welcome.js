@@ -1,6 +1,6 @@
 import React from 'react';
 import womanRunning from '../../assets/woman-run.jpg';
-import {Row, List, Col} from 'antd';
+import {Row} from 'antd';
 import {Link} from 'react-router-dom';
 import AthleteWelcome from '../../components/AthleteWelcome';
 

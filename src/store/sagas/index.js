@@ -10,6 +10,9 @@ function* getListOfActivities() {
        const accessToken = yield select(selectAccessToken);
 
       const activities = yield call(getStravaListOfActivities, accessToken);
+
+      console.log('---activities', activities, '\n');
+
       yield put({type: ADD_ACTIVITIES, payload: {activities}});
    } catch (e) {
       yield put({type: FETCHING_ACTIVITIES_FAILED, payload: {message: e.message}});

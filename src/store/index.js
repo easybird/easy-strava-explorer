@@ -1,4 +1,5 @@
 import {createStore, applyMiddleware, compose} from 'redux';
+import logger from 'redux-logger'
 import rootReducer from './reducers';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -8,7 +9,7 @@ import rootSaga from './sagas';
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: ['authentication']
+  blacklist: ['ui']
 };
 
 const persistedReducer = persistReducer (persistConfig, rootReducer);
@@ -24,7 +25,7 @@ function openReduxDevToolsExtension() {
 export default () => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  let store = createStore (persistedReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
+  let store = createStore (persistedReducer, composeEnhancers(applyMiddleware(sagaMiddleware, logger)));
   let persistor = persistStore (store);
   sagaMiddleware.run(rootSaga)
   return {store, persistor};

@@ -52,7 +52,7 @@ export const PublicIntro = () => [
         To give you some useful insights, we need the combine the data from your
         runs, like speed, distance and altitude. Don't worry, this is free off
         charge, conform{' '}
-        <a href="https://developers.strava.com/guidelines/" target="_blank">
+        <a href="https://developers.strava.com/guidelines/" rel="noopener noreferrer" target="_blank">
           the Strava API guidelines
         </a>
         , and we do not store your data. I created this app, purely out of my own

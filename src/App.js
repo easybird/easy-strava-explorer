@@ -47,7 +47,7 @@ export default () => (
               <div>
                 Please note that we are not related to Strava, we are just using their
                 {' '}
-                <a href="http://developers.strava.com" target="_blank">
+                <a href="http://developers.strava.com" rel="noopener noreferrer" target="_blank">
                   open API
                 </a>
               </div>

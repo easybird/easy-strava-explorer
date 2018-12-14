@@ -98,13 +98,14 @@ function useHrRsTimeSeries (stats = []) {
   return hrRsData;
 }
 
-const mapState = ({stats}) => ({
+const mapState = ({stats, ui}) => ({
   stats: stats.activities,
-  isFetching: stats.isFetching,
+  isFetching: ui.isFetching,
+  error: ui.error
 });
 
 export default function useHRRS () {
-  const {stats, isFetching} = useMappedState (mapState);
+  const {stats, isFetching, error} = useMappedState (mapState);
 
   const [hrrs, setHrrs] = useState ();
   const hrRsTimeSeriesData = useHrRsTimeSeries (hrrs);
@@ -116,16 +117,14 @@ export default function useHRRS () {
   // const [lastMonthPlots, setLastMonthPlots] = useState (); // the plotted data: heart rate (Y) / speed (X)
 
   useEffect (() => {
-    if (!stats.length && !isFetching) {
+    if (!stats.length && !isFetching && !error) {
       getListOfActivities ();
     }
-  });
+  }, [stats, error, isFetching]);
 
   useEffect (
     () => {
       if (!isFetching && stats.length) {
-        console.log('---hupsa set the stats', stats.length, '\n');
-
         setHrrs (
           stats.filter (
             ({visibility, type, has_heartrate}) =>
