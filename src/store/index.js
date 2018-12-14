@@ -15,9 +15,9 @@ const persistedReducer = persistReducer (persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
-// function openReduxDevToolsExtension() {
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__.open();
-// }
+function openReduxDevToolsExtension() {
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__.open();
+}
 
 // openReduxDevToolsExtension();
 

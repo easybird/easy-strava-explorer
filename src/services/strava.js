@@ -9,7 +9,7 @@ const GET_USER_STATS = (id) => `${CURRENT_ATHLETE_URL(id)}/stats`;
 
 const REDIRECT_URI = process.env.NODE_ENV !== 'production' ? `http://${window.location.hostname}:3000/tokenresponse` : "http://whatever";
 
-const LIST_OF_ACTIVITIES = `${ATHLETE_URL}/activities?per_page=200`;
+const LIST_OF_ACTIVITIES = `${ATHLETE_URL}/activities?per_page=300`;
 
 export const STRAVA_REDIRECT_URL = `${BASE_STRAVA_URL}/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}`;
 
@@ -30,12 +30,9 @@ export async function getUserStats(id, accessToken) {
 }
 
 export async function getListOfActivities(accessToken) {
-    console.log('---wwwuuuut!', "getListOfActivities", '\n');
-
     return fetch(LIST_OF_ACTIVITIES, { headers:
         {'Authorization': `Bearer ${accessToken}`}
     }).then(response => response.json()).then(response => {
-        console.log('---wwwuuuut!', response, '\n');
         return response
     });
 }
