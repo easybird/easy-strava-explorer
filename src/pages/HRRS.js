@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import BasicStats from '../components/BasicStats';
 import {useMappedState} from 'redux-react-hook';
 import useHRRS from '../hooks/useHRRS';
+import { Row } from 'antd';
 
 const mapState = ({authentication, ui}) => ({
   authenticated: authentication.authenticated,
@@ -38,14 +39,17 @@ const Stats = ({location}) => {
   }
 
   return (
-    <div>
+    <div className="Home-header">
+      <Row className="Home-paragraph">
       <h2>HR-RS Index</h2>
       <p>
         Running Index is based on the linear relationship between heart rate and
         oxygen uptake – when you run faster, your muscles need more oxygen to
-        produce energy, so your your heart needs to pump blood faster and your
+        produce energy, so your heart needs to pump blood faster and your
         heart rate goes up.
       </p>
+      </Row>
+      <Row className="Home-paragraph">
       <h2>How running index works</h2>
       <p>
         We use your heart rate and pace during your run and your resting heart
@@ -54,6 +58,7 @@ const Stats = ({location}) => {
         to an estimate of running VO2max, in other words your Running Index
         score.
       </p>
+      </Row>
       <BasicStats hrrs={hrrs} hrRsTimeSeriesData={hrRsTimeSeriesData} />
     </div>
   );

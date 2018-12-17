@@ -26,9 +26,7 @@ const Home = () => {
   const {authenticated, athlete, userStats} = useMappedState(mapState);
 
   return (
-    <Row type="flex" justify="start" className="Home">
-      <Col span={16} offset={4}>
-        <Row className="Home-paragraph">
+
           <header className="Home-header">
             <WelcomeText firstName={athlete && athlete.firstname}/>
             <Intro
@@ -37,9 +35,7 @@ const Home = () => {
               userStats={userStats}
             />
           </header>
-        </Row>
-      </Col>
-    </Row>
+
   );
 };
 
