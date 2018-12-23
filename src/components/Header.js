@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Layout, Menu, Button, Avatar } from 'antd';
+import { Layout, Menu, Button, Avatar, Dropdown  } from 'antd';
 import {Link} from 'react-router-dom';
 import {useDispatch, useMappedState} from 'redux-react-hook';
 import {STRAVA_REDIRECT_URL} from '../services/strava';
@@ -63,10 +63,12 @@ const HeaderComponent = ({pathname}) => {
       </Menu>
       <div style={{float: 'right'}}>
         {authenticated
-          ? [<Avatar size="large" icon="user" style={{marginRight: '1em'}}src={athlete.profile} alt={athlete.username}/>,
-          <Button onClick={logout}>
-              Logout
-            </Button>]
+          ? [<Dropdown overlay={<Menu>
+            <Menu.Item><button style={{border: "none", backgroundColor: "inherit"}} type="button" onClick={logout}>
+            Logout
+          </button></Menu.Item>
+          </Menu>}><Avatar size="large" icon="user" style={{marginRight: '1em'}}src={athlete.profile} alt={athlete.username}/></Dropdown>,
+          ]
           : [
           <Button size="large" onClick={() => (window.location = STRAVA_REDIRECT_URL)}>
                 <img style={{ height: '40px'}} src={connectWithStrava} alt="connect with strava" />

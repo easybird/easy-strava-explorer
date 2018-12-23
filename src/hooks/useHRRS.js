@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
-import {useDispatch, useMappedState} from 'redux-react-hook';
-import {metresPerSecondToKmPerHour} from '../utils/conversions';
 import {TimeSeries} from 'pondjs';
-import {GET_LIST_OF_ACTIVITIES} from '../store/reducers/stats';
+import {metresPerSecondToKmPerHour} from '../utils/conversions';
+import useLastStats from './useLastStats';
+
 
 function useHrRsTimeSeries (stats = []) {
   const hrRsTimeSeriesData = {
@@ -14,7 +14,7 @@ function useHrRsTimeSeries (stats = []) {
       'speed',
       'totalElevationGain',
       'distance',
-      'elapsedTime',
+      'movingTime',
     ],
     points: [],
   };
@@ -39,7 +39,7 @@ function useHrRsTimeSeries (stats = []) {
 
   useEffect (
     () => {
-      let maxHrRs, minHrRs;
+      let maxHrRs; let minHrRs;
 
       const timeSeries = new TimeSeries ({
         ...hrRsTimeSeriesData,
@@ -60,7 +60,7 @@ function useHrRsTimeSeries (stats = []) {
               speed,
               totalElevationGain: run.total_elevation_gain,
               distance: run.distance,
-              elapsedTime: run.elapsed_time,
+              movingTime: run.moving_time,
             };
           })
           .sort ((a, b) => a.time - b.time)
@@ -72,7 +72,7 @@ function useHrRsTimeSeries (stats = []) {
               speed,
               totalElevationGain,
               distance,
-              elapsedTime,
+              movingTime,
             }) => [
               time,
               hrRs,
@@ -80,13 +80,13 @@ function useHrRsTimeSeries (stats = []) {
               speed,
               totalElevationGain,
               distance,
-              elapsedTime,
+              movingTime,
             ]
           )
-          .map (event => {
+          .map (event =>
             //   console.log(event);
-            return event;
-          }),
+             event
+          ),
       });
 
       setHrRsData ({hrRsTimeSeries: timeSeries, min: minHrRs, max: maxHrRs});
@@ -98,29 +98,14 @@ function useHrRsTimeSeries (stats = []) {
   return hrRsData;
 }
 
-const mapState = ({stats, ui}) => ({
-  stats: stats.activities,
-  isFetching: ui.isFetching,
-  error: ui.error
-});
-
 export default function useHRRS () {
-  const {stats, isFetching, error} = useMappedState (mapState);
+  const {stats, isFetching} = useLastStats();
 
   const [hrrs, setHrrs] = useState ();
   const hrRsTimeSeriesData = useHrRsTimeSeries (hrrs);
 
-  const dispatch = useDispatch ();
-  const getListOfActivities = () => dispatch ({type: GET_LIST_OF_ACTIVITIES});
-
   // const [allPlots, setAllPlots] = useState (); // the plotted data: heart rate (Y) / speed (X)
   // const [lastMonthPlots, setLastMonthPlots] = useState (); // the plotted data: heart rate (Y) / speed (X)
-
-  useEffect (() => {
-    if (!stats.length && !isFetching && !error) {
-      getListOfActivities ();
-    }
-  }, [stats, error, isFetching]);
 
   useEffect (
     () => {
@@ -138,19 +123,19 @@ export default function useHRRS () {
 
   //  The prerequisites for calculation are that your speed remains above 6 km/h and that the run lasts for at least 12 minutes.
   // set maximal and resting heart rate
-  const logStats = () =>
-    hrrs &&
-    hrrs.forEach (stat =>
-      console.log (
-        '---stat',
-        stat,
-        {
-          average_heartrate: stat['average_heartrate'],
-          average_speed: metresPerSecondToKmPerHour (stat['average_speed']),
-        },
-        '\n'
-      )
-    );
+  // const logStats = () =>
+  //   hrrs &&
+  //   hrrs.forEach (stat =>
+  //     console.log (
+  //       '---stat',
+  //       stat,
+  //       {
+  //         average_heartrate: stat.average_heartrate,
+  //         average_speed: metresPerSecondToKmPerHour (stat.average_speed),
+  //       },
+  //       '\n'
+  //     )
+  //   );
 
   // logStats ();s
 

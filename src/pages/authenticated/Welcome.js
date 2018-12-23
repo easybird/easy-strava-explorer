@@ -1,17 +1,18 @@
 import React from 'react';
-import womanRunning from '../../assets/woman-run.jpg';
 import {Row} from 'antd';
 import {Link} from 'react-router-dom';
+import womanRunning from '../../assets/woman-run.jpg';
 import AthleteWelcome from '../../components/AthleteWelcome';
+import FirstStatsImpression from '../../components/FirstStatsImpression';
 
-export const Welcome = ({athlete, userStats}) => [
+const Welcome = ({athlete, userStats}) => [
   <Row key="athleteWelcome" className="Home-paragraph" justify="center">
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <AthleteWelcome athlete={athlete} userStats={userStats} />
     </div>
   </Row>,
   <Row key="investigation" className="Home-paragraph">
-    <h2>What will we investigate?</h2>
+    <h2>What are we looking for?</h2>
     <div>
       <img
         style={{
@@ -43,11 +44,12 @@ export const Welcome = ({athlete, userStats}) => [
   <Row key="explanation">
     <h4>Heart Rate Running Speed Index</h4>
     <p>
-      We will combine your heart rate and your average speed. We bundle the data
+      We combine your heart rate and your average speed. We bundle the data
       of your runs, mix your stats and do some useful calculations with it. We
       present you with some smart charts to give you a good idea of how well you
       are doing.
     </p>
+    <FirstStatsImpression />
     <p>
       <Link to="/hrrs">Have a look at your graphs</Link>
     </p>
@@ -66,3 +68,5 @@ export const Welcome = ({athlete, userStats}) => [
     </p>
   </Row>,
 ];
+
+export default Welcome;

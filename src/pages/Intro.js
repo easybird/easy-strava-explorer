@@ -1,11 +1,13 @@
 import React from 'react';
 
 import {PublicIntro} from './public/PublicIntro';
-import {Welcome} from './authenticated/Welcome';
+import Welcome from './authenticated/Welcome';
 
-export const Intro = ({authenticated, athlete, userStats}) =>
+const Intro = ({authenticated, athlete, userStats}) =>
   authenticated ? (
     <Welcome athlete={athlete} userStats={userStats} />
   ) : (
     <PublicIntro />
   );
+
+  export default Intro;

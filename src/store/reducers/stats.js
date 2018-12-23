@@ -1,3 +1,5 @@
+import { LOGOUT_SUCCESS } from "./authentication";
+
 export const GET_LIST_OF_ACTIVITIES = 'GET_LIST_OF_ACTIVITIES';
 export const ADD_ACTIVITIES = 'ADD_ACTIVITIES';
 export const FETCHING_ACTIVITIES_FAILED = 'FETCHING_ACTIVITIES_FAILED';
@@ -19,6 +21,12 @@ const stats = (state = initialState, action) => {
       return {
         ...state,
         activities: action.payload ? [...state.activities, ...action.payload.activities] : state.activities,
+      };
+      case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        activities: [],
+        userStats: null,
       };
     default:
       return state;

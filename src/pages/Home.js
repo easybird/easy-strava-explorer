@@ -1,13 +1,7 @@
 import React from 'react';
-import { Intro } from './Intro';
-import {useMappedState} from 'redux-react-hook';
-import {Row, Col} from 'antd';
-
-const mapState = ({authentication, stats}) => ({
-  authenticated: authentication.authenticated,
-  athlete: authentication.athlete,
-  userStats: stats.userStats,
-});
+import {Row} from 'antd';
+import Intro from './Intro';
+import useUserData from '../hooks/useUserData';
 
 const WelcomeText = ({firstName}) => (
   <Row key="stamina" className="Home-paragraph">
@@ -23,10 +17,9 @@ const WelcomeText = ({firstName}) => (
 
 
 const Home = () => {
-  const {authenticated, athlete, userStats} = useMappedState(mapState);
+  const {authenticated, athlete, userStats} = useUserData()
 
   return (
-
           <header className="Home-header">
             <WelcomeText firstName={athlete && athlete.firstname}/>
             <Intro

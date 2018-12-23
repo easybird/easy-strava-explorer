@@ -19,6 +19,10 @@
   margin-top: 3em;
 }
 
+.Home-paragraph a {
+  color: #d4380d;
+}
+
 .ant-menu-horizontal > .ant-menu-item-selected > a {
   color: #d4380d;
 }

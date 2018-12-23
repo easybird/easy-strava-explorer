@@ -58,7 +58,7 @@ export default function ChartsContainer({hrTimeSeries, min, max}) {
   let speed = '-';
   let totalElevationGain = '-';
   let distance = '-';
-  let elapsedTime = '-';
+  let movingTime = '-';
 
   if (highlightedPoint) {
     hrRsIndex = round(highlightedPoint.event.get (highlightedPoint.column))
@@ -67,7 +67,7 @@ export default function ChartsContainer({hrTimeSeries, min, max}) {
     speed = highlightedPoint.event.get ('speed');
     totalElevationGain = highlightedPoint.event.get ('totalElevationGain');
     distance = highlightedPoint.event.get ('distance');
-    elapsedTime = highlightedPoint.event.get ('elapsedTime');
+    movingTime = highlightedPoint.event.get ('movingTime');
     infoValues = [{label: 'HR-RS Index', value: hrRsIndex}];
   }
 
@@ -82,7 +82,7 @@ export default function ChartsContainer({hrTimeSeries, min, max}) {
           <p>Total elevation gain: {totalElevationGain} metres</p>
           <p>Average elevation: {round(totalElevationGain/(distance/1000))} metres/km </p>
           <p>Distance: {round(distance/1000)} km</p>
-          <p>Elapsed time: {round(elapsedTime/60)} minutes</p>
+          <p>Moving time: {round(movingTime/60)} minutes</p>
         </div>
 
         <hr />

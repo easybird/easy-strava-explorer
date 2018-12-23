@@ -1,18 +1,12 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import BasicStats from '../components/BasicStats';
-import {useMappedState} from 'redux-react-hook';
 import useHRRS from '../hooks/useHRRS';
 import { Row } from 'antd';
-
-const mapState = ({authentication, ui}) => ({
-  authenticated: authentication.authenticated,
-  athlete: authentication.athlete,
-  error: ui.error,
-});
+import useUserData from '../hooks/useUserData';
 
 const Stats = ({location}) => {
-  const {authenticated, error} = useMappedState(mapState);
+  const {authenticated, error} = useUserData();
   const {hrrs, hrRsTimeSeriesData} = useHRRS();
 
   if (!authenticated) {

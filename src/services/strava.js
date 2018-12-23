@@ -12,7 +12,7 @@ const REDIRECT_URI =
     ? `http://${window.location.hostname}:3000/tokenresponse`
     : 'http://whatever';
 
-const LIST_OF_ACTIVITIES = `${ATHLETE_URL}/activities?per_page=200`;
+const LIST_OF_ACTIVITIES = `${ATHLETE_URL}/activities?per_page=10`;
 
 export const STRAVA_REDIRECT_URL = `${BASE_STRAVA_URL}/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}`;
 

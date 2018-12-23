@@ -31,5 +31,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@inthepocket/itp-react-scripts": "^0.48.0"
+  }
 }
