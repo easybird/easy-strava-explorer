@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import {auth} from '../services/strava';
 import { Redirect} from 'react-router-dom';
 import {useDispatch, useMappedState } from 'redux-react-hook';
+import {auth} from '../services/strava';
 import { LOGIN_SUCCESS } from '../store/reducers/authentication';
 
 const mapState = ({authentication}) => ({
@@ -20,8 +20,8 @@ const AuthenticationCallback = ({location}) => {
 
             const result = await auth (code);
 
-            if (result['access_token'] && result.athlete) {
-              loginSuccess({ accessToken: result['access_token'] , athlete: result.athlete});
+            if (result.access_token && result.athlete) {
+              loginSuccess({ accessToken: result.access_token , athlete: result.athlete});
             }
         }
     }, [ authenticated ])

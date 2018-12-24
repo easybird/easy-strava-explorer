@@ -20,39 +20,39 @@ const getTotalDistanceSentence = (distance, city) => {
     return `That's like running more then ${round(
       distance / MAX_EARTH_KM
     )} times around the earth!`;
-  } else if (distance > BRUSSELS_MOSCOW) {
+  } if (distance > BRUSSELS_MOSCOW) {
     return runToCities({
       distanceRan: distance,
       exampleDistance: BRUSSELS_MOSCOW,
       cities: ['Brussels', 'Moscow'],
     });
-  } else if (distance > BRUSSELS_LISBOA) {
+  } if (distance > BRUSSELS_LISBOA) {
     return runToCities({
       distanceRan: distance,
       exampleDistance: BRUSSELS_LISBOA,
       cities: ['Brussels', 'Lisboa'],
     });
-  } else if (distance > BRUSSELS_MADRID) {
+  } if (distance > BRUSSELS_MADRID) {
     return runToCities({
       distanceRan: distance,
       exampleDistance: BRUSSELS_MADRID,
       cities: ['Brussels', 'Madrid'],
     });
-  } else if (distance > BRUSSELS_LYON) {
+  } if (distance > BRUSSELS_LYON) {
     return runToCities({
       distanceRan: distance,
       exampleDistance: BRUSSELS_LYON,
       cities: ['Brussels', 'Lyon'],
     });
-  } else if (distance > BRUSSELS_PARIS) {
+  } if (distance > BRUSSELS_PARIS) {
     return runToCities({
       distanceRan: distance,
       exampleDistance: BRUSSELS_PARIS,
       cities: ['Brussels', 'Paris'],
     });
-  } else {
+  } 
     return `Thats like...not that far? You just ran a few blocks in the city of ${city}?`;
-  }
+  
 };
 
 const Text = ({text}) => <em>{text}</em>;
@@ -72,11 +72,11 @@ const AthleteIntroText = ({
       <EmphasisedText text={totalRunCount} />
       <Text text={` times since ${prettifyDate(firstRunningDay)}. `} />
       <br />
-      <Text text={`After running for `} />
+      <Text text="After running for " />
       <EmphasisedText text={`${round(totalMovingTime / 60 / 60, 0)} `} />
       <Text text={`hours in total, you've crossed `} />
       <EmphasisedText text={`${totalDistanceTimeInKilometres} `} />
-      <Text text={`kilometres.`} />
+      <Text text="kilometres." />
       <br />
       <Text
         text={`${getTotalDistanceSentence(
@@ -181,7 +181,7 @@ const AthleteWelcome = ({athlete, userStats}) => {
       cover={<img src={athlete.profile} alt={athlete.username} />}
       tabList={tabList}
       activeTabKey={state.key}
-      onTabChange={key => setState({...state, key: key})}
+      onTabChange={key => setState({...state, key})}
     >
       {contentList[state.key]}
     </Card>

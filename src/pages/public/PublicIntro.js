@@ -1,6 +1,6 @@
 import React from 'react';
-import womanRunning from '../../assets/woman-run.jpg';
 import {Row } from 'antd';
+import womanRunning from '../../assets/woman-run.jpg';
 import { LoginView, LoginButton } from './LoginButton';
 
 export const PublicIntro = () => [

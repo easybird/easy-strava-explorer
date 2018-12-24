@@ -1,8 +1,8 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import { Row } from 'antd';
 import BasicStats from '../components/BasicStats';
 import useHRRS from '../hooks/useHRRS';
-import { Row } from 'antd';
 import useUserData from '../hooks/useUserData';
 
 const Stats = ({location}) => {

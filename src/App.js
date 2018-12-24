@@ -2,12 +2,12 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Header from './components/Header';
 import {Layout, Row, Col} from 'antd';
 import {StoreProvider} from 'redux-react-hook';
+import {PersistGate} from 'redux-persist/integration/react';
+import Header from './components/Header';
 import configureStore from './store';
 import {Home, HRRS, Info, AuthenticationCallback} from './pages';
-import {PersistGate} from 'redux-persist/integration/react';
 import powerdByStravaHorizontal from './assets/api_logo_pwrdBy_strava_horiz_light.svg';
 import hero from './assets/hero-run.jpg';
 
@@ -33,9 +33,7 @@ export default () => (
           />
           <div style={{height: '50vh'}}>
             <Route
-              render={props => {
-                return <Header pathname={props.location.pathname} />;
-              }}
+              render={props => <Header pathname={props.location.pathname} />}
             />
           </div>
 

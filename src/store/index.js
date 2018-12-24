@@ -3,7 +3,7 @@ import logger from 'redux-logger'
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga'
-import rootReducer from './reducers';
+import reducers from './reducers';
 import rootSaga from './sagas';
 
 const persistConfig = {
@@ -11,6 +11,13 @@ const persistConfig = {
   storage,
   blacklist: ['ui']
 };
+
+const rootReducer = (state, action) => {
+  if (action.type === 'CLEAR_STATE') {
+    return {};
+  }
+  return reducers(state, action);
+}
 
 const persistedReducer = persistReducer (persistConfig, rootReducer);
 

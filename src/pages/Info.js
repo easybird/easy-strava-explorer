@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Info = ({location}) => {
-  return (
+const Info = ({location}) => (
     <div
       style={{
         display: 'flex',
@@ -68,6 +67,5 @@ const Info = ({location}) => {
     </div>
     </div>
   );
-};
 
 export default Info;

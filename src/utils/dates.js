@@ -1,5 +1,3 @@
 import { format } from "date-fns";
 
-export const prettifyDate = date => {
- return format(date, 'D MMMM YYYY');
-}
+export const prettifyDate = date => format(date, 'D MMMM YYYY')

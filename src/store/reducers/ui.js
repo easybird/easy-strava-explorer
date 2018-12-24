@@ -1,4 +1,4 @@
-export const GET_LIST_OF_ACTIVITIES = 'GET_LIST_OF_ACTIVITIES';
+export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
 export const ADD_ACTIVITIES = 'ADD_ACTIVITIES';
 export const FETCHING_ACTIVITIES_FAILED = 'FETCHING_ACTIVITIES_FAILED';
 export const ADD_USER_STATS = 'ADD_USER_STATS';
@@ -10,7 +10,7 @@ const initialState = {
 
 const stats = (state = initialState, action) => {
   switch (action.type) {
-    case GET_LIST_OF_ACTIVITIES:
+    case FETCH_ACTIVITIES:
       return {...state, isFetching: state.isFetching + 1};
     case ADD_ACTIVITIES:
       return {

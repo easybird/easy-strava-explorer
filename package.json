@@ -21,10 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "eject": "react-scripts eject",
+    "lint": "itp-react-scripts lint"
   },
   "browserslist": [
     ">0.2%",
@@ -33,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@inthepocket/itp-react-scripts": "^0.48.0"
+    "@inthepocket/itp-react-scripts": "^0.48.0",
+    "jest": "^23.6.0"
   }
 }

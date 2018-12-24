@@ -1,8 +1,8 @@
 import React from 'react';
+import { Card} from 'antd';
 import connectWithStrava from '../../assets/btn_strava_connectwith_orange.svg';
 
 import {STRAVA_REDIRECT_URL} from '../../services/strava';
-import { Card} from 'antd';
 
 export const LoginButton = () => (
     <a href={STRAVA_REDIRECT_URL}>
