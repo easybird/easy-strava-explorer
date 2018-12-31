@@ -25,16 +25,10 @@ export default function useLastStats (totalRuns = DEFAULT_TOTAL_RUNS) {
     const getRunsWithPhoto = () => dispatch ({type: GET_RUNS_WITH_PHOTO, payload: { totalRuns, specialRequestKey: GET_RUNS_WITH_PHOTO_SPECIAL_REQUEST_KEY(totalRuns)}});
 
     useEffect (() => {
-      console.log('---useEffect change', runsWithPhotos, '\n');
-
       if (!runsWithPhotos || runsWithPhotos === SPECIAL_REQUEST_BUSY) {
-        console.log('---getRunsWithPhoto' , runsWithPhotos, '\n');
         getRunsWithPhoto ();
       }
     }, [runsWithPhotos, totalRuns]);
-
-    console.log('---update useLastStats', runsWithPhotos, '\n');
-
 
     return {
       runs,

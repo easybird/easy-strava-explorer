@@ -5,6 +5,8 @@ import useLastStats, {
   DEFAULT_TOTAL_RUNS,
 } from '../hooks/useLastStats';
 import Run from './Run';
+import { useHrRsTimeSeriesById } from '../hooks/useHRRS';
+import BasicStats from './BasicStats';
 
 const STATS_TYPE = {
   LAST_RUNS: 1,
@@ -33,8 +35,9 @@ const FirstStatsImpression = () => {
   const [selectedRadioButton, onChangeRadioButton] = useState(
     STATS_TYPE.WITH_PHOTOS
   );
-
   const selectedRuns = selectRuns(selectedRadioButton, lastRuns);
+
+  const hrRsTimeSeriesData = useHrRsTimeSeriesById(selectedRuns);
 
   return (
     <div>
@@ -78,6 +81,7 @@ const FirstStatsImpression = () => {
               <Run style={runStyle} key={key} />
             ))}
       </div>
+      {selectedRuns && <BasicStats hrrs={selectedRuns} hrRsTimeSeriesData={hrRsTimeSeriesData} />}
     </div>
   );
 };

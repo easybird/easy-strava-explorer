@@ -39,7 +39,6 @@ const BasicStats = ({hrrs, hrRsTimeSeriesData}) => {
   return (
     <div style={{alignItems: 'left', width: '80vh'}}>
       <ChartsContainer hrrs={hrrs} hrTimeSeries={hrRsTimeSeries} min={min} max={max} />
-      {hrrs.map (run => <Run key={run.id} run={run} />)}
     </div>
   );
 };
