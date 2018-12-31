@@ -42,7 +42,7 @@ export const PublicIntro = () => [
       <p>
         Once you're logged in, this app bundles the data of your runs, mixes your
         stats and does some useful calculations with it. We will present you with
-        some smart charts to give you a good idea of how well you are doing.
+        some smart charts to give you a good idea how well you are doing.
       </p>
       <LoginView />
       <Row key="whyLogin" className="Home-paragraph">

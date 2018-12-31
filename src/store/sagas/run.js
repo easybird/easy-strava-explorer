@@ -12,12 +12,14 @@ const selectAccessToken = ({authentication}) => authentication.accessToken;
 const selectStravaId = ({stats}, runId) => stats && stats.runs[runId] && stats.runs[runId].stravaId;
 
 function* getDetail({ payload: { runId }}) {
+    console.log('---getDetail', runId, '\n');
+
   try {
     const accessToken = yield select(selectAccessToken);
     const stravaId = yield select(selectStravaId, runId);
 
     const run = yield call(getStravaActivityDetail, accessToken, stravaId);
-    console.log('---received detail', run, '\n');
+    console.log('---received detail', {detail: mapDetailRunToStat(run), runId}, '\n');
 
     yield put({
       type: UPDATE_DETAIL,

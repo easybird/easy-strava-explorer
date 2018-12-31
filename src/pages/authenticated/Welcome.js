@@ -46,7 +46,7 @@ const Welcome = ({athlete, userStats}) => [
     <p>
       We combine your heart rate and your average speed. We bundle the data
       of your runs, mix your stats and do some useful calculations with it. We
-      present you with some smart charts to give you a good idea of how well you
+      present you with some smart charts to give you a good idea how well you
       are doing.
     </p>
     <FirstStatsImpression />

@@ -9,7 +9,7 @@ export function mapDetailRunToStat(run) {
 function mapActivityToStat(activity) {
   const averageSpeed = metresPerSecondToKmPerHour(activity.average_speed);
   const averageHeartRate = activity.average_heartrate;
-  const hrRs = averageHeartRate / averageSpeed;
+  const hrRs = averageHeartRate && averageHeartRate / averageSpeed;
   return {
     stravaId: activity.id,
     name: activity.name,

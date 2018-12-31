@@ -10,10 +10,19 @@ export default function useRun(id) {
     const {runs} = useMappedState (mapState);
     const dispatch = useDispatch ();
     useEffect(() => {
-        if (!runs[id] || (!runs[id].hasPhoto && !runs[id].hasDetail)) {
-            dispatch ({type: GET_DETAIL, payload: { runId: id}});
+        if (id) {
+            const hasPhotoButNoDetail = runs[id].hasPhoto && !runs[id].hasDetail && !runs[id].isFetching
+            if (!runs[id] || hasPhotoButNoDetail) {
+                dispatch ({type: GET_DETAIL, payload: { runId: id}});
+            }
         }
-    }, [id, runs[id]])
+    }, [id, runs[id]]);
+
+    console.log('---runs[id]', runs[id], '\n');
+
+    if (!id) {
+        return {};
+    }
 
     return runs ? runs[id] : {};
 }
