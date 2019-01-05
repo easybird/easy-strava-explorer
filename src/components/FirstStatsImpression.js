@@ -37,7 +37,7 @@ const FirstStatsImpression = () => {
   );
   const selectedRuns = selectRuns(selectedRadioButton, lastRuns);
 
-  const hrRsTimeSeriesData = useHrRsTimeSeriesById(selectedRuns);
+  const hrRsTimeSeriesData = useHrRsTimeSeriesById(selectedRuns || undefined); // selectedRuns can be false
 
   return (
     <div>
